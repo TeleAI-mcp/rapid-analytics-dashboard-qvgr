@@ -2,11 +2,11 @@ name: Auto-close completed issues
 
 on:
   issues:
-    types: [labeled]
+    types: [labeled, opened]
 
 jobs:
   close-issue:
-    if: github.event.label.name == 'completed'
+    if: contains(github.event.issue.labels.*.name, 'completed')
     runs-on: ubuntu-latest
     steps:
       - name: Close issue
